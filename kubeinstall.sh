@@ -109,7 +109,8 @@ net.ipv4.ip_forward = 1
 EOF
 
 sleep 3
-sudo kubeadm init --cri-socket /run/cri-dockerd.socksleep 3
+sudo kubeadm init --cri-socket /run/cri-dockerd.sock
+sleep 3
 sleep 3
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -123,6 +124,14 @@ kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 kubectl get nodes
 sleep 3
+
+sudo tee /run/flannel/subnet.env <<EOF
+FLANNEL_NETWORK=10.244.0.0/16
+FLANNEL_SUBNET=10.244.0.1/24
+FLANNEL_MTU=1450
+FLANNEL_IPMASQ=true
+EOF
+
 sleep 3
 sleep 3
 sleep 3
