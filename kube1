@@ -1,0 +1,11 @@
+https://k21academy.com/docker-kubernetes/fixing-proc-sys-net-bridge-bridge-nf-call-iptables-does-not-exist-error-when-executing-the-kubeadm-init-command/
+
+
+https://phoenixnap.com/kb/kubernetes-almalinux
+
+https://www.liquidweb.com/help-docs/install-kubernetes-on-linux-almalinux/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.122.143:6443 --token bmd4hx.6l6kzagtqlfvw2bn \
+	--discovery-token-ca-cert-hash sha256:2f0425307b797c4b032dc74f9cc8ac9b22fedf02bf62369ab66eb30b9be4c567 
