@@ -93,8 +93,41 @@ sleep 3
 sudo dnf install kubeadm kubelet kubectl --disableexcludes=kubernetes
 
 sleep 3
+sudo systemctl enable kubelet
+sudo systemctl start kubelet
+sleep 3
+sudo kubeadm init --cri-socket /run/cri-dockerd.socksleep 3
+sleep 3
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+sleep 3
+
+kubectl get nodes
+sleep 3
+kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+kubectl get nodes
 sleep 3
 sleep 3
 sleep 3
 sleep 3
 sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+sleep 3
+
