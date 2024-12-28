@@ -95,6 +95,19 @@ sudo dnf install kubeadm kubelet kubectl --disableexcludes=kubernetes
 sleep 3
 sudo systemctl enable kubelet
 sudo systemctl start kubelet
+
+sleep 3
+tee /etc/modules-load.d/containerd.conf <<EOF
+br_netfilter
+EOF
+modprobe br_netfilter
+
+tee /etc/sysctl.d/kubernetes.conf<<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
 sleep 3
 sudo kubeadm init --cri-socket /run/cri-dockerd.socksleep 3
 sleep 3
