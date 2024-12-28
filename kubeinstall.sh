@@ -90,7 +90,7 @@ EOF
 
 sleep 3
 
-sudo dnf install kubeadm kubelet kubectl --disableexcludes=kubernetes
+sudo dnf install  -y kubeadm kubelet kubectl --disableexcludes=kubernetes
 
 sleep 3
 sudo systemctl enable kubelet
