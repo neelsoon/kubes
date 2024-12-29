@@ -22,7 +22,7 @@ sudo firewall-cmd --reload
 
 sleep 3
 
-sudo hostnamectl k8s.nalba.online
+hostnamectl hostname k8s.nalba.online
 sleep 3
 
 echo "127.0.0.1 k8s.nalba.online" | sudo tee -a /etc/fstab
