@@ -1,16 +1,18 @@
 ## Using wget to download and execute the script in one command
 #wget -qO- https://raw.githubusercontent.com/neelsoon/kubes/main/kubeinstallv2.sh | bash
 #https://phoenixnap.com/kb/calico-kubernetes
+#mac 52:54:00:5C:AA:69	
+# 
 sudo setenforce 0
-sleep 3
+sleep 1.5
 
 sudo sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/sysconfig/selinux
 
-sleep 3
+sleep 1.5
 
 sestatus
 
-sleep 3
+sleep 1.5
 
 sudo firewall-cmd --permanent --add-port=6443/tcp
 sudo firewall-cmd --permanent --add-port=2379-2380/tcp
@@ -24,29 +26,29 @@ sudo firewall-cmd --permanent --add-port=4789/udp
 
 sudo firewall-cmd --reload
 
-sleep 3
+sleep 1.5
 
 hostnamectl hostname k8s.nalba.online
-sleep 3
+sleep 1.5
 
 echo "127.0.0.1 k8s.nalba.online" | sudo tee -a /etc/fstab
 
 
-sleep 3
+sleep 1.5
 swapoff -a
 sudo sed -i '/ swap / s/^/#/' /etc/fstab
 
-sleep 3
+sleep 1.5
 sudo yum update -y
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-sleep 3
+sleep 1.5
 
 sudo yum install -y docker-ce docker-ce-cli containerd.io --allowerasing
 sudo systemctl enable docker
 sudo systemctl start docker
 
-sleep 3
+sleep 1.5
 echo '{
   "exec-opts": ["native.cgroupdriver=systemd"],
   "log-driver": "json-file",
@@ -57,30 +59,30 @@ echo '{
 }' | sudo tee /etc/docker/daemon.json > /dev/null
 
 
-sleep 3
+sleep 1.5
 
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-sleep 3
+sleep 1.5
 wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.16/cri-dockerd-0.3.16.amd64.tgz
 tar xvf cri-dockerd-0.3.16.amd64.tgz
-sleep 3
+sleep 1.5
 sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
 cri-dockerd --version
 wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
-sleep 3
+sleep 1.5
 
 sudo mv cri-docker.socket cri-docker.service /etc/systemd/system/
-sleep 3
+sleep 1.5
 sudo sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
 sudo systemctl daemon-reload
-sleep 3
+sleep 1.5
 sudo systemctl enable cri-docker.service
-sleep 3
+sleep 1.5
 sudo systemctl enable --now cri-docker.socket
 
-sleep 3
+sleep 1.5
 
 sudo tee /etc/yum.repos.d/kubernetes.repo <<EOF
 [kubernetes]
@@ -92,15 +94,15 @@ gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
 exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 EOF
 
-sleep 3
+sleep 1.5
 
 sudo dnf install  -y kubeadm kubelet kubectl --disableexcludes=kubernetes
 
-sleep 3
+sleep 1.5
 sudo systemctl enable kubelet
 sudo systemctl start kubelet
 
-sleep 3
+sleep 1.5
 tee /etc/modules-load.d/containerd.conf <<EOF
 br_netfilter
 EOF
@@ -112,39 +114,21 @@ net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF
 
-sleep 3
+sleep 1.5
 sudo kubeadm init --cri-socket /run/cri-dockerd.sock
-sleep 3
-sleep 3
+sleep 1.5
+sleep 1.5
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-sleep 3
+sleep 1.5
 
 kubectl get nodes
-sleep 3
+sleep 1.5
 
-sleep 3
+sleep 1.5
 
 
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
-sleep 3
+sleep 1.5
+sleep 1.5 
