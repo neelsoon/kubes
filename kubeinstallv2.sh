@@ -1,5 +1,5 @@
 ## Using wget to download and execute the script in one command
-#wget -qO- https://raw.githubusercontent.com/neelsoon/kubes/main/kubeinstall.sh | bash
+#wget -qO- https://raw.githubusercontent.com/neelsoon/kubes/main/kubeinstallv2.sh | bash
 #https://phoenixnap.com/kb/calico-kubernetes
 sudo setenforce 0
 sleep 3
