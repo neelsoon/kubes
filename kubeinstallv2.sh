@@ -123,6 +123,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 sleep 1.5
+#kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 kubectl get nodes
 sleep 1.5
