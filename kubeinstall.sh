@@ -33,7 +33,7 @@ swapoff -a
 sudo sed -i '/ swap / s/^/#/' /etc/fstab
 
 sleep 3
-sudo yum update
+sudo yum update -y
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sleep 3
